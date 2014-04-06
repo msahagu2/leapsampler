@@ -3139,6 +3139,7 @@ var DualSwipe = function(firstGesture, secondGesture, direction) {
     this.state = "stop";
 };
 
+
 var LeapManager = (function() {
     'use strict';
     var LEAP_POINTABLE_CURSOR_CLASS = "leap-pointable-cursor";
@@ -3443,6 +3444,8 @@ var LeapManager = (function() {
                                             virtualCursor.dispatchMove();
                                         }
                                     } else if(me.enableScrollbarScrolling) {
+                                        var cl = 0; 
+
                                         if (gesture.state === "start") {
                                             if(LeapManagerUtils.exists(cursor._lastElementTime)) {
                                                 var timeDiff = new Date() - cursor._lastElementTime;
@@ -3452,8 +3455,11 @@ var LeapManager = (function() {
                                             }
                                             cursor._lastElementTime = new Date();
 
-                                            if(cursor.getElement() && !LeapManagerUtils.exists(cursor._scrollElement)) {
+                                            if(gesture.normal[2] > 0) {
                                                 cursor._scrollElement = cursor.getElement();
+                                                console.log("Clockwise");
+                                                    // cl = 1;
+                                                    playLast();
                                             }
                                             
                                             if(LeapManagerUtils.exists(cursor._scrollElement)){
@@ -3468,9 +3474,12 @@ var LeapManager = (function() {
                                                     me.scrollbarScrollingConfig.scrollMinSpeed, me.scrollbarScrollingConfig.scrollMaxSpeed);
 
                                                 if(gesture.normal[2] > 0) {
-                                                    cursor._scrollElement.scroll(-speed);
+                                                    
+                                                    //setTimeout(1000);
+                                                  cursor.restartTap();
                                                 } else {
-                                                    cursor._scrollElement.scroll(speed);
+                                                   console.log("Counter-Clockwise");
+                                                  
                                                 }
                                             }
                                         }else if(gesture.state === "end") {
@@ -3534,10 +3543,10 @@ var LeapManager = (function() {
                                     if(me.enableDefaultMetaGestureActions) {
                                         switch(dualSwipe.direction) {
                                             case "left":
-                                                history.back();
+                                                stopAll(); //tag
                                                 break;
                                             case "right":
-                                                history.forward();
+                                                unStop();
                                                 break;
                                             case "up":
                                                 break;

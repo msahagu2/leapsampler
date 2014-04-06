@@ -30,6 +30,36 @@
  * Also, as you may note: Whoa, reliable cross-platform/device audio support is hard! ;)
  */
 
+var lastSound;
+
+function looper(strname){
+  lastSound = strname;
+  console.log("I WAS CLICKED!!!", lastSound); 
+}
+
+function playLast(){
+    
+    if(lastSound != undefined){ 
+        console.log("PLAY LAST", lastSound);
+        soundManager.getSoundById(lastSound).play({loops: 3});}
+}
+
+function stopLast(){
+    
+    if(lastSound != undefined){ 
+        console("Stopping last sound", lastSound);
+        soundManager.destroySound(lastSound);}
+}
+
+function stopAll(){
+    soundManager.mute();
+}
+
+function unStop(){
+    soundManager.unmute();
+}
+
+
 (function(window, _undefined) {
 
     "use strict";
@@ -45,6 +75,8 @@
      * @this {SoundManager}
      * @return {SoundManager} The new SoundManager instance
      */
+
+
 
     function SoundManager(smURL, smID) {
 
@@ -135,7 +167,7 @@
             // callback function for when playing fails
             'onfinish': null,
             // callback function for "sound finished playing"
-            'multiShot': true,
+            'multiShot': false,
             // let sounds "restart" or layer on top of each other when played multiple times, rather than one-shot/one at a time
             'multiShotEvents': false,
             // fire multiple sound events (currently onfinish() only) when multiShot is enabled
@@ -143,7 +175,7 @@
             // offset (milliseconds) to seek to within loaded sound data.
             'pan': 0,
             // "pan" settings, left-to-right, -100 to 100
-            'stream': true,
+            'stream': false,
             // allows playing before entire file has loaded (recommended)
             'to': null,
             // position to end playback within a sound (msec), default = end
@@ -6080,4 +6112,5 @@
     window.soundManager = soundManager; // public API, flash callbacks etc.
 
 }(window));
+
 

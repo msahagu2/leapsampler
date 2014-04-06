@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/flashblock.css" />
     <link rel="stylesheet" href="css/mpc.css" media="screen" />
     <script type="text/javascript" src="source/soundmanager2.js"></script>
+    <script type="text/javascript" src="example_files/leapstrap.js"></script>
     <script type="text/javascript" src="source/mpc.js"></script>
 
 
@@ -33,7 +34,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="leap-interactive" leap-disable-tap="true" leap-disable-hover="true">
 
   <p class="note"><span style="display:none">(If supported): </span><span id="isHTML5"></span></p>
   <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -54,34 +55,32 @@
     <div class="row">
 
 <div class="col-xs-1">
-<p><a onclick="soundManager.play('s0')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 0 </a></p>
+<p><a onclick="soundManager.play('s0');looper('s0');" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="1000" leap-enable-multitap="true"> ## <br> <br> 0 </a></p>
 </div>
 <div class="col-xs-1">
-<p><a onclick="soundManager.play('s1')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 1 </a></p>
+<p><a onclick="soundManager.play('s1');looper('s1');" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="1000" leap-enable-multitap="true"> ## <br> <br> 1 </a></p>
 </div>
 <div class="col-xs-1">
-<p><a onclick="soundManager.play('s2')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 2 </a></p>
+<p><a onclick="soundManager.play('s2');looper('s2');" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="1000" leap-enable-multitap="true"> ## <br> <br> 2 </a></p>
 </div>
 <div class="col-xs-1">
-<p><a onclick="soundManager.play('s3')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 3 </a></p>
+<p><a onclick="soundManager.play('s3');looper('s3');" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="1000" leap-enable-multitap="true"> ## <br> <br> 3 </a></p>
 </div>
 <div class="col-xs-1">
-<p><a onclick="soundManager.play('s4')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 4 </a></p>
+<p><a onclick="soundManager.play('s4');looper('s4');" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="1000" leap-enable-multitap="true"> ## <br> <br> 4 </a></p>
 </div>
 <div class="col-xs-1">
-<p><a onclick="soundManager.play('s5')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 5 </a></p>
+<p><a onclick="soundManager.play('s5');looper('s5');" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="1000" leap-enable-multitap="true"> ## <br> <br> 5 </a></p>
 </div>
 <div class="col-xs-1">
-<p><a onclick="soundManager.play('s6')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 6 </a></p>
+<p><a onclick="soundManager.play('s6');looper('s6');" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="1000" leap-enable-multitap="true"> ## <br> <br> 6 </a></p>
 </div>
 <div class="col-xs-1">
-<p><a onclick="soundManager.play('s7')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 7 </a></p>
+<p><a onclick="soundManager.play('s8'); looper('s8');" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="1000" leap-enable-multitap="true"> ## <br> <br> 8 </a></p>
+
+<br> <br><br> <br><br> <br><br> <br><br> <br>
 </div>
-<div class="col-xs-1">
-<p><a onclick="soundManager.play('s8')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 8 </a></p>
-</div>
-<div class="col-xs-1">
-<p><a onclick="soundManager.play('s9')" class="btn btn-primary btn-lg leap-interactive" role="button" leap-click-delay="100" leap-enable-multitap="true"> ## <br> <br> 9 </a></p>
+
 </div>
       </div>
 
@@ -108,6 +107,9 @@
         enableScrollbarScrolling: true,
 
       });
+
+
+
     </script><div style="z-index: 100000; position: fixed; top: 0px; left: 0px;" class="leap-cursor-container"></div>
 
 

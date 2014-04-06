@@ -43,9 +43,7 @@ var MPC = function() {
   }
 
   this._showStatus = function(sID,n1,n2) {
-    var o = self._getButton(sID).getElementsByTagName('div')[0];
-    var offX = (n2>0?(-self.progressWidth+parseInt((n1/n2)*o.offsetWidth)):-self.progressWidth);
-    o.style.backgroundPosition = offX+'px 0px';
+    
   }
 
   this._getButton = function(sID) {
