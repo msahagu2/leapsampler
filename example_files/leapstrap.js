@@ -3385,68 +3385,12 @@ var LeapManager = (function() {
                                     var speed;
                                     var virtualSource = 'leap-scroller';
                                     var virtualCursor = me.cursorManager.getVirtualCursor(virtualSource, gesture.id);
+                                    
 
-                                    if(me.enableTouchScrolling) {
-                                        if (gesture.state === "start") {
-                                            cursor.disableTap();
-                                            if(virtualCursor) {
-                                                me.removeVirtualCursor(virtualCursor);
-                                            }
+                                    if(me.enableScrollbarScrolling) {
 
-                                            var icon = new LeapElement(document.createElement('div'));
-                                            icon.addClass(LEAP_POINTABLE_CURSOR_CLASS);
-                                            icon.addClass(LEAP_POINTABLE_VIRTUAL_CURSOR_CLASS);
-                                            icon.addClass(LEAP_POINTABLE_VIRTUAL_SCROLLER_CURSOR_CLASS);
-                                            var cfg = {
-                                                source: virtualSource,
-                                                id: gesture.id,
-                                                position: position,
-                                                icon: icon
-                                            };
-
-                                            cfg.virtualParent = cursor;
-                                            virtualCursor = new Cursor(cfg);
-                                            virtualCursor.onAdded = function() { 
-                                                this.dispatchDown(); 
-                                            };
-                                            virtualCursor.onRemoved = function() { 
-                                                this.setVelocityXYZ(0,0,0);
-                                                this.dispatchUp(); 
-                                            };
-
-                                            me.cursorManager.addVirtualCursor(virtualCursor);
-
-                                        } else if (gesture.state === "stop" && virtualCursor) {
-                                            cursor.restartTap();
-                                            me.cursorManager.removeVirtualCursor(virtualCursor);
-                                        } else if(virtualCursor) {
-
-                                            speed = LeapManagerUtils.map(
-                                                gesture.duration/1000000, 
-                                                0, me.touchScrollingConfig.scrollMaxDuration, 
-                                                me.touchScrollingConfig.scrollMinSpeed, me.touchScrollingConfig.scrollMaxSpeed);
-
-
-                                            if(gesture.normal[2] > 0) {
-                                                virtualCursor.setVelocityXYZ(
-                                                    speed * me.touchScrollingConfig.scrollVector.x,
-                                                    speed * me.touchScrollingConfig.scrollVector.y,
-                                                    speed * me.touchScrollingConfig.scrollVector.z
-                                                );
-                                            }else{
-                                                virtualCursor.setVelocityXYZ(
-                                                    speed * -me.touchScrollingConfig.scrollVector.x,
-                                                    speed * -me.touchScrollingConfig.scrollVector.y,
-                                                    speed * -me.touchScrollingConfig.scrollVector.z
-                                                );
-                                            }
-                                            
-                                            virtualCursor.dispatchMove();
-                                        }
-                                    } else if(me.enableScrollbarScrolling) {
-                                        var cl = 0; 
-
-                                        if (gesture.state === "start") {
+                                      var clwk = 1;
+                                        if (gesture.state == "start") {
                                             if(LeapManagerUtils.exists(cursor._lastElementTime)) {
                                                 var timeDiff = new Date() - cursor._lastElementTime;
                                                 if(timeDiff > me.scrollbarScrollingConfig.resetDelay) {
@@ -3457,32 +3401,54 @@ var LeapManager = (function() {
 
                                             if(gesture.normal[2] > 0) {
                                                 cursor._scrollElement = cursor.getElement();
-                                                console.log("Clockwise");
-                                                    // cl = 1;
-                                                    playLast();
+                                                //console.log("Counter Clockwise start");
+                                                    
+                    
+                                            }
+                                            else{
+                                                cursor._scrollElement = cursor.getElement();
+                                                //console.log(" Clockwise start");
+                                                    
                                             }
                                             
                                             if(LeapManagerUtils.exists(cursor._scrollElement)){
                                                 cursor.disableTap();
                                             }
-                                        } else if (gesture.state === "update") {
+                                        } 
+                                        else if (gesture.state == "update") {
                                             if(LeapManagerUtils.exists(cursor._scrollElement)) {
-                                                cursor._lastElementTime = new Date();
+                                                //cursor._lastElementTime = new Date();
+                                                /*
                                                 speed = LeapManagerUtils.map(
                                                     gesture.duration/1000000, 
                                                     0, me.scrollbarScrollingConfig.scrollMaxDuration, 
-                                                    me.scrollbarScrollingConfig.scrollMinSpeed, me.scrollbarScrollingConfig.scrollMaxSpeed);
-
+                                                    me.scrollbarScrollingConfig.scrollMinSpeed, me.scrollbarScrollingConfig.scrollMaxSpeed);*/
                                                 if(gesture.normal[2] > 0) {
-                                                    
-                                                    //setTimeout(1000);
-                                                  cursor.restartTap();
-                                                } else {
-                                                   console.log("Counter-Clockwise");
+                                                    console.log(clwk);
+                                                    clwk = 0;
+                                                    console.log("Counter Clockwise Update", clwk);
+                                                      //setTimeout(1000);
+                                                    //cursor.restartTap();
+                                                } 
+                                                else {
+                                                  clwk = 1;
+                                                  console.log("Clockwise Update", clwk);
                                                   
                                                 }
+                                                // setTimeout(1000);
                                             }
-                                        }else if(gesture.state === "end") {
+                                            console.log("clwk is", clwk);
+                                        }
+                                        else if(gesture.state == "stop") {
+                                            console.log("Circle End", clwk);
+                                            if(clwk==1) {
+                                              playLast();
+                                            }
+                                            else if(clwk==0){
+                                              console.log("Else, stoplast gets called");
+                                              stopLast();
+                                            }
+                                            else console.log("not reaching blah");
                                             cursor.restartTap();
                                         }
                                     }

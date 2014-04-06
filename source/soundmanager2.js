@@ -31,24 +31,32 @@
  */
 
 var lastSound;
+var array = [];
+
 
 function looper(strname){
   lastSound = strname;
-  console.log("I WAS CLICKED!!!", lastSound); 
+  array.push(lastSound);
+  console.log("I WAS CLICKED!!!", lastSound, array[0]); 
 }
 
 function playLast(){
     
-    if(lastSound != undefined){ 
+    if(array.length>0){ 
         console.log("PLAY LAST", lastSound);
-        soundManager.getSoundById(lastSound).play({loops: 3});}
+        soundManager.getSoundById(array[array.length-1]).play({loops: 10});
+    }
+    else console.log("Array empty");
 }
 
 function stopLast(){
     
-    if(lastSound != undefined){ 
-        console("Stopping last sound", lastSound);
-        soundManager.destroySound(lastSound);}
+    if(array.length>0){ 
+        console.log("Stopping last sound", lastSound);
+        var deletethis = array.pop();
+        soundManager.pause(deletethis);
+    }
+    else console.log("Array empty");
 }
 
 function stopAll(){
