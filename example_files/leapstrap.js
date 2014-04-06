@@ -3140,6 +3140,8 @@ var DualSwipe = function(firstGesture, secondGesture, direction) {
 };
 
 
+
+
 var LeapManager = (function() {
     'use strict';
     var LEAP_POINTABLE_CURSOR_CLASS = "leap-pointable-cursor";
@@ -3424,27 +3426,22 @@ var LeapManager = (function() {
                                                     0, me.scrollbarScrollingConfig.scrollMaxDuration, 
                                                     me.scrollbarScrollingConfig.scrollMinSpeed, me.scrollbarScrollingConfig.scrollMaxSpeed);*/
                                                 if(gesture.normal[2] > 0) {
-                                                    console.log(clwk);
-                                                    clwk = 0;
-                                                    console.log("Counter Clockwise Update", clwk);
+                                                    changeVariable(0);
                                                       //setTimeout(1000);
                                                     //cursor.restartTap();
                                                 } 
                                                 else {
-                                                  clwk = 1;
-                                                  console.log("Clockwise Update", clwk);
-                                                  
+                                                  changeVariable(1);
                                                 }
                                                 // setTimeout(1000);
                                             }
-                                            console.log("clwk is", clwk);
                                         }
                                         else if(gesture.state == "stop") {
-                                            console.log("Circle End", clwk);
-                                            if(clwk==1) {
+                                            console.log("Circle End", getVariable());
+                                            if(getVariable()==1) {
                                               playLast();
                                             }
-                                            else if(clwk==0){
+                                            else if(getVariable()==0){
                                               console.log("Else, stoplast gets called");
                                               stopLast();
                                             }

@@ -98,7 +98,7 @@ soundManager.setup({
 		document.getElementById('isHTML5').style.display = 'inline';
     }
 
-    var soundURLs = 'piano-1,piano-2,piano-3,piano-4,piano-5,piano-6,piano-7,piano-8,Beat,AMB_SN13,AMB_SN_5,CHINA_1,CRASH_1,CRASH_5,CRASH_6,RIDE_1'.split(',');
+    var soundURLs = 'piano-1,piano-2,piano-3,piano-4,piano-5,piano-6,piano-7,piano-8,Beat,Beautiful Stars,Hey!,Ladies & Gentlemen Sample,Look At Cha,CRASH_6,RIDE_1'.split(',');
     for (var i=0; i<soundURLs.length; i++) {
       soundManager.createSound({
         id: 's'+i,

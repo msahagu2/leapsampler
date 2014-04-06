@@ -1,6 +1,14 @@
-var lastSound;
+//Helper functions
 
-function looper(strname){
-  lastSound = strname;
-  console.log("I WAS CLICKED!!!", lastSound); 
+///MSHACK
+var clwk = null; 
+function changeVariable(cccl){
+    clwk = cccl;
+    return clwk;
 }
+
+function getVariable(){
+  return clwk;
+}
+
+/// MSHACK
